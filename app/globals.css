@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fbf8ff;
+  --color-ink: #2a1f5c;
+  --color-ink-soft: #5d5486;
+  --color-sun: #ffc93c;
+  --color-sun-soft: #fff1c2;
+  --color-coral: #ff7a6b;
+  --color-coral-soft: #ffe1dc;
+  --color-leaf: #4cc38a;
+  --color-leaf-soft: #d9f5e6;
+  --color-sky: #4aa8ff;
+  --color-sky-soft: #dcefff;
+  --color-grape: #7b5cff;
+  --color-grape-soft: #ebe4ff;
+  --color-berry: #ff5fa2;
+  --color-berry-soft: #ffe0ee;
+  --font-display: var(--font-jua), "Jua", system-ui, sans-serif;
+  --font-sans: var(--font-noto), "Pretendard", system-ui, -apple-system, sans-serif;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-spin-slow: spin 24s linear infinite;
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-wiggle: wiggle 2.4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+}
+.font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+.caret::after { content: "|"; margin-left: 2px; animation: blink 1s step-end infinite; }
+.dot-bg {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-ink) 10%, transparent) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.squiggle {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q10 0 20 6 T40 6' fill='none' stroke='%237b5cff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x bottom / 40px 12px;
+  padding-bottom: 10px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+.bg-dream {
+  background:
+    radial-gradient(60% 50% at 10% 10%, #ffd9ec 0%, transparent 60%),
+    radial-gradient(50% 50% at 90% 20%, #d6e8ff 0%, transparent 60%),
+    radial-gradient(60% 60% at 50% 100%, #e9e0ff 0%, transparent 60%),
+    #fbf8ff;
+}
+.bg-night {
+  background: radial-gradient(80% 60% at 50% 0%, #4b3a9e 0%, #2a1f5c 55%, #1b1440 100%);
+}
