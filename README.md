@@ -5,6 +5,12 @@
 - 기획서: [docs/PLAN.md](docs/PLAN.md)
 - 기술 스택: Next.js 16 (App Router, SSG) · Tailwind CSS 4 · Motion
 
+## 내 컴퓨터에서 바로 보기 (로컬 미리보기)
+1. [Node.js LTS](https://nodejs.org) 설치 (처음 한 번)
+2. 이 저장소를 내려받기: GitHub 저장소 화면 → 브랜치 `claude/charming-euler-mat1j1` 선택 → **Code → Download ZIP** → 압축 풀기
+3. 실행: Windows는 `start-local.bat`, macOS는 `start-local.command`를 더블클릭
+4. 브라우저에서 http://localhost:3000 이 자동으로 열립니다 (코드를 고치면 화면에 바로 반영)
+
 ## 개발
 
 ```bash
