@@ -2,7 +2,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { episodeSdgs, goalName } from "@/lib/sdgs";
 import { getProgram } from "@/lib/programs";
-import SdgGrid from "./SdgGrid";
+import Image from "next/image";
+import SdgIcon from "./SdgIcon";
+import SdgWheel from "./SdgWheel";
 import { SectionHead } from "./Section";
 
 export default function SdgsTeaser() {
@@ -25,13 +27,15 @@ export default function SdgsTeaser() {
           />
           <ul className="mt-8">
             {live.map((e) => (
-              <li key={e.slug} className="grid grid-cols-[6rem_1fr] gap-4 border-t border-white/15 py-4 last:border-b">
-                <span className="font-serif whitespace-nowrap text-2xl text-gold">SDG {e.base}</span>
+              <li key={e.slug} className="grid grid-cols-[4.5rem_1fr] items-center gap-4 border-t border-white/15 py-4 last:border-b">
+                <SdgIcon n={e.base} className="w-[4.5rem]" />
                 <span>
                   <span className="font-serif text-lg">
                     {e.ep} {getProgram(e.slug)?.title}
                   </span>
-                  <span className="block text-sm text-mist">{goalName(e.base)}</span>
+                  <span className="block text-sm text-mist">
+                    SDG {e.base} · {goalName(e.base)}
+                  </span>
                 </span>
               </li>
             ))}
@@ -41,8 +45,13 @@ export default function SdgsTeaser() {
           </Link>
         </div>
         <div className="md:col-span-5 md:col-start-8 md:self-center">
-          <SdgGrid dark compact />
-          <p className="mt-4 text-sm leading-relaxed text-mist">17개 목표 모두를 에피소드로 만드는 것이 오토끼의 목표입니다. 현재 2편 공연 중, 나머지는 제작 예정.</p>
+          <Image src="/brand/sdg-logo-white.svg" alt="Sustainable Development Goals" width={500} height={90} className="mx-auto mb-8 h-9 w-auto" />
+          <SdgWheel
+            highlight={[14, 10]}
+            className="mx-auto w-full max-w-[380px]"
+            center={<Image src="/images/poses/pose-c.webp" alt="" width={499} height={900} className="h-full w-auto" />}
+          />
+          <p className="mt-6 text-center text-sm leading-relaxed text-mist">17개 목표 모두를 에피소드로 만드는 것이 오토끼의 목표입니다. 현재 2편 공연 중, 나머지는 제작 예정.</p>
         </div>
       </div>
     </section>

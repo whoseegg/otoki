@@ -1,0 +1,2 @@
+SDG goal icons rendered from @digitalbonds/un-sdgs (MIT) Lottie assets.
+Official artwork: United Nations Sustainable Development Goals. Used for informational purposes under the UN SDG Communication Guidelines. Not endorsed by the United Nations.

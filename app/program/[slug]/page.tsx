@@ -11,6 +11,7 @@ import { faqs } from "@/lib/faq";
 import { breadcrumbLd, faqLd, programLd } from "@/lib/jsonld";
 import { getProgram, programs } from "@/lib/programs";
 import { episodeSdgs, goalName } from "@/lib/sdgs";
+import SdgIcon from "@/components/SdgIcon";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -66,7 +67,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
               <span className="mt-4 inline-block rounded-full border border-gold-ink px-3 py-1 text-sm text-gold-ink">{p.status}</span>
             )}
             {sdg && (
-              <Link href="/sdgs" className="mt-4 flex w-fit items-center gap-2 text-[15px] text-gold-ink underline-offset-4 hover:underline">
+              <Link href="/sdgs" className="mt-4 flex w-fit items-center gap-3 text-[15px] text-gold-ink underline-offset-4 hover:underline">
+                <SdgIcon n={sdg.base} label={false} className="w-11 shrink-0" />
                 {p.ep ? `${p.ep} · ` : ""}UN SDGs {sdg.base}번 ‘{goalName(sdg.base)}’ 기반{sdg.status === "제작 예정" ? " · 제작 예정" : ""}
               </Link>
             )}

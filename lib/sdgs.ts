@@ -4,27 +4,28 @@
 //  - 다음 제작: SDG 9 디지털 시민성 교육, SDG 10 다문화 이해 교육
 //  - 17개 목표별 에피소드 계획표 (아래 roadmap)
 
-export type Goal = { n: number; name: string; theme: string };
+// color: UN SDG 공식 색상 (SDG 커뮤니케이션 가이드라인), en: 공식 영문 약칭
+export type Goal = { n: number; name: string; theme: string; color: string; en: string };
 
 // 17개 목표와 목표별 에피소드(교육 주제) 계획
 export const goals: Goal[] = [
-  { n: 1, name: "빈곤 종식과 사회안전망 강화", theme: "경제교육 (기부, 나눔)" },
-  { n: 2, name: "식량안보와 지속가능한 농업", theme: "식습관 교육 (건강한 밥상)" },
-  { n: 3, name: "건강하고 행복한 삶", theme: "감성교육 (정서 지원)" },
-  { n: 4, name: "모두를 위한 양질의 교육", theme: "질 높은 교육 실현" },
-  { n: 5, name: "성평등", theme: "인권교육 (양성평등)" },
-  { n: 6, name: "건강하고 안전한 물 관리", theme: "환경교육 (물 절약)" },
-  { n: 7, name: "친환경 에너지", theme: "친환경 에너지 이해교육" },
-  { n: 8, name: "좋은 일자리와 경제성장", theme: "진로교육 (직업 체험)" },
-  { n: 9, name: "산업 성장과 혁신", theme: "디지털 시민성 교육" },
-  { n: 10, name: "모든 종류의 불평등 해소", theme: "장애인식개선교육, 다문화교육" },
-  { n: 11, name: "지속가능한 도시와 거주지", theme: "이웃과 함께 사는 세상" },
-  { n: 12, name: "책임감 있는 소비와 생산", theme: "경제교육 (계획적 소비)" },
-  { n: 13, name: "기후변화 대응", theme: "환경교육 (탄소중립)" },
-  { n: 14, name: "해양생태계 보전", theme: "환경교육 (해양오염)" },
-  { n: 15, name: "육상생태계 보전", theme: "생태교육 (멸종위기 동물)" },
-  { n: 16, name: "평화, 정의, 포용", theme: "인권교육 (시민의식)" },
-  { n: 17, name: "지구촌 협력 강화", theme: "평화교육 (위인)" },
+  { n: 1, name: "빈곤 종식과 사회안전망 강화", theme: "경제교육 (기부, 나눔)", color: "#E5243B", en: "No Poverty" },
+  { n: 2, name: "식량안보와 지속가능한 농업", theme: "식습관 교육 (건강한 밥상)", color: "#DDA63A", en: "Zero Hunger" },
+  { n: 3, name: "건강하고 행복한 삶", theme: "감성교육 (정서 지원)", color: "#4C9F38", en: "Good Health and Well-being" },
+  { n: 4, name: "모두를 위한 양질의 교육", theme: "질 높은 교육 실현", color: "#C5192D", en: "Quality Education" },
+  { n: 5, name: "성평등", theme: "인권교육 (양성평등)", color: "#FF3A21", en: "Gender Equality" },
+  { n: 6, name: "건강하고 안전한 물 관리", theme: "환경교육 (물 절약)", color: "#26BDE2", en: "Clean Water and Sanitation" },
+  { n: 7, name: "친환경 에너지", theme: "친환경 에너지 이해교육", color: "#FCC30B", en: "Affordable and Clean Energy" },
+  { n: 8, name: "좋은 일자리와 경제성장", theme: "진로교육 (직업 체험)", color: "#A21942", en: "Decent Work and Economic Growth" },
+  { n: 9, name: "산업 성장과 혁신", theme: "디지털 시민성 교육", color: "#FD6925", en: "Industry, Innovation and Infrastructure" },
+  { n: 10, name: "모든 종류의 불평등 해소", theme: "장애인식개선교육, 다문화교육", color: "#DD1367", en: "Reduced Inequalities" },
+  { n: 11, name: "지속가능한 도시와 거주지", theme: "이웃과 함께 사는 세상", color: "#FD9D24", en: "Sustainable Cities and Communities" },
+  { n: 12, name: "책임감 있는 소비와 생산", theme: "경제교육 (계획적 소비)", color: "#BF8B2E", en: "Responsible Consumption and Production" },
+  { n: 13, name: "기후변화 대응", theme: "환경교육 (탄소중립)", color: "#3F7E44", en: "Climate Action" },
+  { n: 14, name: "해양생태계 보전", theme: "환경교육 (해양오염)", color: "#0A97D9", en: "Life Below Water" },
+  { n: 15, name: "육상생태계 보전", theme: "생태교육 (멸종위기 동물)", color: "#56C02B", en: "Life on Land" },
+  { n: 16, name: "평화, 정의, 포용", theme: "인권교육 (시민의식)", color: "#00689D", en: "Peace, Justice and Strong Institutions" },
+  { n: 17, name: "지구촌 협력 강화", theme: "평화교육 (위인)", color: "#19486A", en: "Partnerships for the Goals" },
 ];
 
 export const goalName = (n: number) => goals.find((g) => g.n === n)?.name ?? "";

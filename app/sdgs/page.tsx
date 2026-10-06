@@ -5,7 +5,10 @@ import Otoki from "@/components/Otoki";
 import Faq from "@/components/Faq";
 import FinalCta from "@/components/FinalCta";
 import JsonLd from "@/components/JsonLd";
-import SdgGrid from "@/components/SdgGrid";
+import Image from "next/image";
+import SdgExplorer from "@/components/SdgExplorer";
+import SdgIcon from "@/components/SdgIcon";
+import SdgWheel from "@/components/SdgWheel";
 import { breadcrumbLd, faqLd } from "@/lib/jsonld";
 import { getProgram } from "@/lib/programs";
 import { episodeSdgs, goalName, goals, liveGoals, nextGoals } from "@/lib/sdgs";
@@ -94,11 +97,17 @@ export default function SdgsPage() {
         }}
       />
 
-      <section className="on-stage bg-stage text-paper">
-        <div className="mx-auto grid max-w-[1120px] gap-12 px-5 pb-20 pt-32 md:grid-cols-12 md:pt-40">
+      <section className="on-stage relative overflow-hidden bg-stage text-paper">
+        <div className="mx-auto grid max-w-[1120px] items-center gap-12 px-5 pb-20 pt-32 md:grid-cols-12 md:pt-40">
           <div className="md:col-span-6">
-            <p className="label !text-gold">UN 지속가능발전목표 × 오토끼의 시간여행</p>
-            <h1 className="font-serif mt-4 text-[2.3rem] leading-[1.25] sm:text-5xl">
+            <div className="flex flex-wrap items-center gap-4">
+              <Image src="/brand/sdg-logo-white.svg" alt="Sustainable Development Goals" width={500} height={90} className="h-9 w-auto sm:h-11" priority />
+              <span className="text-xl text-mist" aria-hidden>
+                ×
+              </span>
+              <Image src="/brand/otoki-logo.svg" alt="오토끼의 시간여행" width={86} height={58} className="h-12 w-auto" />
+            </div>
+            <h1 className="font-serif mt-8 text-[2.3rem] leading-[1.25] sm:text-5xl">
               어려운 지구의 약속,
               <br />
               공연으로 쉽게
@@ -107,21 +116,28 @@ export default function SdgsPage() {
               SDGs(지속가능발전목표)는 2030년까지 전 세계가 함께 이루기로 한 17가지 약속입니다. 어른에게도 어려운 이 약속을,
               오토끼의 시간여행은 아이들이 오늘부터 실천할 수 있는 이야기로 바꿉니다.
             </p>
-            <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-white/15 pt-6">
-              <div>
-                <dt className="text-sm text-mist">EP.1 푸른고래이야기</dt>
-                <dd className="font-serif mt-1 text-2xl">SDG 14</dd>
-                <dd className="text-sm text-mist">해양생태계 보전</dd>
-              </div>
-              <div>
-                <dt className="text-sm text-mist">EP.2 모두의 놀이터</dt>
-                <dd className="font-serif mt-1 text-2xl">SDG 10</dd>
-                <dd className="text-sm text-mist">모든 종류의 불평등 해소</dd>
-              </div>
-            </dl>
+            <ul className="mt-8 grid grid-cols-2 gap-6 border-t border-white/15 pt-6">
+              {[
+                { n: 14, ep: "EP.1 푸른고래이야기" },
+                { n: 10, ep: "EP.2 모두의 놀이터" },
+              ].map((x) => (
+                <li key={x.n} className="flex items-center gap-4">
+                  <SdgIcon n={x.n} className="w-16 shrink-0 sm:w-20" />
+                  <p>
+                    <span className="block text-sm text-mist">{x.ep}</span>
+                    <span className="font-serif mt-1 block text-xl">SDG {x.n}</span>
+                    <span className="block text-sm text-mist">{goalName(x.n)}</span>
+                  </p>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="md:col-span-5 md:col-start-8 md:self-end">
-            <SdgGrid dark compact />
+          <div className="md:col-span-5 md:col-start-8">
+            <SdgWheel
+              highlight={[14, 10]}
+              className="mx-auto w-full max-w-[440px]"
+              center={<Image src="/images/poses/pose-f.webp" alt="" width={407} height={900} className="h-full w-auto" priority />}
+            />
           </div>
         </div>
       </section>
@@ -171,7 +187,8 @@ export default function SdgsPage() {
           const p = getProgram(e.slug)!;
           return (
             <article key={e.slug} className="mt-16">
-              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b-2 border-stage pb-4">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 border-b-2 border-stage pb-4">
+                <SdgIcon n={e.base} className="w-20 shrink-0 sm:w-24" />
                 <span className="label">{e.ep} · 공연 중</span>
                 <h3 className="font-serif text-2xl sm:text-3xl">
                   {p.title} <span className="text-lg text-muted">· {p.name}</span>
@@ -185,7 +202,7 @@ export default function SdgsPage() {
                 <table className="w-full min-w-[720px] text-left text-[15px]">
                   <thead>
                     <tr className="border-b border-line text-sm text-muted">
-                      <th scope="col" className="w-48 py-3 pr-4 font-semibold">목표</th>
+                      <th scope="col" className="w-56 py-3 pr-4 font-semibold">목표</th>
                       <th scope="col" className="py-3 pr-4 font-semibold">어른의 언어</th>
                       <th scope="col" className="py-3 pr-4 font-semibold">아이의 언어 (공연 장면)</th>
                       <th scope="col" className="py-3 font-semibold">실천 (전후 활동)</th>
@@ -195,9 +212,13 @@ export default function SdgsPage() {
                     {e.links.map((l) => (
                       <tr key={l.goal} className="border-b border-line align-top">
                         <th scope="row" className="py-4 pr-4">
-                          <span className="font-serif text-xl">{l.goal}</span>{" "}
-                          <span className="font-semibold">{goalName(l.goal)}</span>
-                          <span className="mt-1 block text-xs font-normal text-gold-ink">{l.role}</span>
+                          <span className="flex items-start gap-3">
+                            <SdgIcon n={l.goal} className="w-12 shrink-0" />
+                            <span>
+                              <span className="font-semibold">{goalName(l.goal)}</span>
+                              <span className="mt-1 block text-xs font-normal text-gold-ink">{l.role}</span>
+                            </span>
+                          </span>
                         </th>
                         <td className="py-4 pr-4 leading-relaxed text-muted">{l.adult}</td>
                         <td className="py-4 pr-4 font-semibold leading-relaxed">{l.kid}</td>
@@ -266,7 +287,12 @@ export default function SdgsPage() {
         <p className="mt-4 max-w-[640px] text-[17px] leading-[1.8] text-muted">
           목표마다 아이 눈높이의 교육 주제를 정해 두었습니다. 현재 2편을 공연 중이며, 나머지는 차례로 제작할 예정입니다.
         </p>
-        <div className="mt-10 overflow-x-auto">
+        <div className="mt-12">
+          <SdgExplorer />
+        </div>
+        <details className="mt-12 border-t border-line pt-4">
+          <summary className="cursor-pointer text-[15px] font-semibold">17개 목표 에피소드 계획 표로 보기</summary>
+        <div className="mt-6 overflow-x-auto">
           <table className="w-full min-w-[600px] text-left text-[15px]">
             <thead>
               <tr className="border-b-2 border-stage text-sm text-muted">
@@ -294,6 +320,7 @@ export default function SdgsPage() {
             </tbody>
           </table>
         </div>
+        </details>
       </section>
 
       {/* 누리과정 연계 */}
@@ -321,7 +348,7 @@ export default function SdgsPage() {
           </table>
         </div>
         <p className="mt-6 text-xs leading-relaxed text-muted">
-          * 오토끼의 시간여행은 UN 지속가능발전목표를 교육 주제로 활용한 공연이며, UN의 공식 승인이나 후원을 받은 프로그램은 아닙니다.
+          * SDG 로고와 17개 목표 아이콘은 UN SDG 커뮤니케이션 가이드라인에 따라 정보 제공 목적으로 사용했습니다. 오토끼의 시간여행은 UN 지속가능발전목표를 교육 주제로 활용한 공연이며, UN의 공식 승인이나 후원을 받은 프로그램은 아닙니다.
         </p>
       </section>
 
