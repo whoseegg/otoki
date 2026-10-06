@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: p.status ? 0.6 : 0.9,
     })),
+    { url: `${site.url}/sdgs`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${site.url}/events`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${site.url}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.8 },
   ];

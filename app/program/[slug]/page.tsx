@@ -10,6 +10,7 @@ import { PlaybillList } from "@/components/Playbill";
 import { faqs } from "@/lib/faq";
 import { breadcrumbLd, faqLd, programLd } from "@/lib/jsonld";
 import { getProgram, programs } from "@/lib/programs";
+import { episodeSdgs, goalName } from "@/lib/sdgs";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -42,6 +43,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
   const p = getProgram((await params).slug);
   if (!p) notFound();
   const pageFaqs = [...p.faq, ...faqs.slice(1, 4)];
+  const sdg = episodeSdgs.find((e) => e.slug === p.slug);
   const keyword = p.keywords[0].replace(/^(유치원|어린이집|유아|어린이) /, "");
 
   return (
@@ -63,12 +65,17 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {p.status && (
               <span className="mt-4 inline-block rounded-full border border-gold-ink px-3 py-1 text-sm text-gold-ink">{p.status}</span>
             )}
+            {sdg && (
+              <Link href="/sdgs" className="mt-4 flex w-fit items-center gap-2 text-[15px] text-gold-ink underline-offset-4 hover:underline">
+                {p.ep ? `${p.ep} · ` : ""}UN SDGs {sdg.base}번 ‘{goalName(sdg.base)}’ 기반{sdg.status === "제작 예정" ? " · 제작 예정" : ""}
+              </Link>
+            )}
             <p className="font-serif mt-6 text-xl leading-[1.5] sm:text-2xl">{p.hook}</p>
             <a
               href={`tel:${site.phone}`}
               className="mt-8 inline-flex items-center gap-2 rounded-md bg-stage px-6 py-3.5 text-[17px] font-semibold text-paper hover:bg-stage-deep"
             >
-              <Phone size={18} strokeWidth={1.75} aria-hidden /> {p.status ? "출시 일정 전화 문의" : "이 공연 일정 전화 문의"}
+              <Phone size={18} strokeWidth={1.75} aria-hidden /> {p.status ? "공개 일정 전화 문의" : "이 공연 일정 전화 문의"}
             </a>
           </div>
           <div className="flex justify-center md:col-span-4 md:col-start-9 md:justify-end">

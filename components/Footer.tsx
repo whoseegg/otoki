@@ -35,6 +35,8 @@ export default function Footer() {
         <div>
           <p className="label !text-gold">바로가기</p>
           <ul className="mt-4 space-y-2.5 text-sm">
+            <li><Link href="/sdgs" className="hover:text-paper">UN SDGs 교육</Link></li>
+            <li><Link href="/events" className="hover:text-paper">어린이 행사·체험 부스</Link></li>
             <li><Link href="/faq" className="hover:text-paper">자주 묻는 질문</Link></li>
             <li><Link href="/contact" className="hover:text-paper">공연 문의 안내</Link></li>
             {site.naverPlace && <li><a href={site.naverPlace} className="hover:text-paper" rel="noopener" target="_blank">네이버 플레이스</a></li>}

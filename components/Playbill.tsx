@@ -18,6 +18,7 @@ export function PlaybillList({ exclude }: { exclude?: string }) {
             <span className="font-serif text-xl text-gold-ink">{String(i + 1).padStart(2, "0")}</span>
             <span>
               <span className="font-serif text-xl underline-offset-[6px] group-hover:underline sm:text-[1.4rem]">{p.title}</span>
+              {p.ep && <span className="ml-2 align-middle text-xs text-gold-ink">{p.ep}</span>}
               {p.status && (
                 <span className="ml-2 inline-block translate-y-[-2px] rounded-full border border-gold-ink px-2 py-0.5 align-middle text-xs text-gold-ink">
                   {p.status}

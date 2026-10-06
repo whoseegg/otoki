@@ -9,8 +9,9 @@ import { site } from "@/lib/site";
 
 const nav = [
   { href: "/#theater", label: "무빙 씨어터" },
-  { href: "/#story", label: "진행 방식" },
   { href: "/program", label: "공연 주제" },
+  { href: "/sdgs", label: "SDGs 교육" },
+  { href: "/events", label: "행사·부스" },
   { href: "/faq", label: "자주 묻는 질문" },
 ];
 
@@ -37,7 +38,7 @@ export default function Header() {
         <Link href="/" aria-label="오토끼의 시간여행 홈" className="shrink-0">
           <Image src="/brand/otoki-logo.svg" alt="오토끼의 시간여행" width={86} height={58} priority className="h-12 w-auto" />
         </Link>
-        <nav className="hidden items-center gap-8 text-[15px] md:flex" aria-label="주요 메뉴">
+        <nav className="hidden items-center gap-7 text-[15px] lg:flex" aria-label="주요 메뉴">
           {nav.map((n) => (
             <Link key={n.href} href={n.href} className="underline-offset-8 hover:underline">
               {n.label}
@@ -51,7 +52,7 @@ export default function Header() {
           </a>
         </nav>
         <button
-          className="grid h-11 w-11 place-items-center md:hidden"
+          className="grid h-11 w-11 place-items-center lg:hidden"
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
@@ -60,7 +61,7 @@ export default function Header() {
         </button>
       </div>
       {open && (
-        <nav className="border-t border-line bg-paper px-5 pb-6 md:hidden" aria-label="모바일 메뉴">
+        <nav className="border-t border-line bg-paper px-5 pb-6 lg:hidden" aria-label="모바일 메뉴">
           {nav.map((n) => (
             <Link key={n.href} href={n.href} onClick={() => setOpen(false)} className="block border-b border-line py-3.5 text-lg">
               {n.label}

@@ -8,6 +8,8 @@ import Journey from "@/components/Journey";
 import PainPoints from "@/components/PainPoints";
 import Playbill from "@/components/Playbill";
 import Proof from "@/components/Proof";
+import SdgsTeaser from "@/components/SdgsTeaser";
+import EventsTeaser from "@/components/EventsTeaser";
 import QuickFacts from "@/components/QuickFacts";
 import TheaterAnatomy from "@/components/TheaterAnatomy";
 import { faqLd } from "@/lib/jsonld";
@@ -22,7 +24,9 @@ export default function Home() {
       <TheaterAnatomy />
       <Journey />
       <Playbill />
+      <SdgsTeaser />
       <Proof />
+      <EventsTeaser />
       <AiShowcase />
       <Compare />
       <QuickFacts />
