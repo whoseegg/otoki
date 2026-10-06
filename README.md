@@ -11,6 +11,9 @@
 3. 실행: Windows는 `start-local.bat`, macOS는 `start-local.command`를 더블클릭
 4. 브라우저에서 http://localhost:3000 이 자동으로 열립니다 (코드를 고치면 화면에 바로 반영)
 
+> **최신 작업을 자동으로 받으려면** ZIP 대신 [GitHub Desktop](https://desktop.github.com)으로 저장소를 Clone하세요 (브랜치 `claude/charming-euler-mat1j1`).
+> 그러면 `start-local.bat`을 실행할 때마다 최신 작업 내용을 자동으로 받아옵니다. 서버를 켜 둔 상태에서는 GitHub Desktop의 **Fetch origin → Pull** 버튼만 누르면 화면이 바로 바뀝니다.
+
 ## 개발
 
 ```bash

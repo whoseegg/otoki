@@ -6,6 +6,7 @@ if ! command -v node >/dev/null 2>&1; then
   open https://nodejs.org
   exit 1
 fi
+if [ -d .git ] && command -v git >/dev/null 2>&1; then echo "GitHub에서 최신 작업 내용을 받아옵니다..."; git pull --ff-only && npm install --no-audit --no-fund >/dev/null; fi
 [ -d node_modules ] || { echo "처음 실행이라 필요한 파일을 설치합니다..."; npm install; }
 (sleep 6 && open http://localhost:3000) &
 npm run dev

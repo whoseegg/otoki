@@ -12,6 +12,14 @@ if errorlevel 1 (
   exit /b 1
 )
 
+if exist .git (
+  where git >nul 2>nul && (
+    echo [최신 반영] GitHub에서 최신 작업 내용을 받아옵니다...
+    git pull --ff-only
+    call npm install --no-audit --no-fund >nul
+  )
+)
+
 if not exist node_modules (
   echo [1/2] 처음 실행이라 필요한 파일을 설치합니다. 1~3분 정도 걸립니다...
   call npm install
