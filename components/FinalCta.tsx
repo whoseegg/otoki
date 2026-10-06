@@ -1,42 +1,35 @@
 import Link from "next/link";
+import { Phone } from "lucide-react";
 import { site } from "@/lib/site";
-import Otoki from "./Otoki";
-import Reveal from "./Reveal";
+import Otoki, { type OtokiPose } from "./Otoki";
 
-export default function FinalCta() {
+export default function FinalCta({ pose = "g" }: { pose?: OtokiPose }) {
   return (
-    <section className="px-4 py-20 sm:px-6">
-      <Reveal>
-        <div className="bg-night relative mx-auto max-w-6xl overflow-hidden rounded-[36px] px-6 py-14 text-cream ring-[3px] ring-ink sm:px-14">
-          <div className="relative z-10 max-w-xl">
-            <p className="font-bold text-sun">공연 일정은 빨리 마감돼요</p>
-            <h2 className="font-display mt-3 text-3xl leading-snug sm:text-5xl">
-              &ldquo;오토끼 또 언제 와요?&rdquo;
-              <br />
-              그 질문을 우리 원에서도 들어 보세요
-            </h2>
-            <p className="mt-4 text-lg text-cream/80">
-              전화 한 통이면 충분해요. 원하는 날짜와 인원만 알려 주시면 주제와 회차, 견적까지 맞춰 안내해 드릴게요.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={`tel:${site.phone}`}
-                className="rounded-full bg-sun px-7 py-4 text-lg font-bold text-ink ring-2 ring-ink transition hover:-translate-y-0.5"
-              >
-                📞 {site.phone}
-              </a>
-              <Link href="/contact" className="rounded-full bg-white/10 px-7 py-4 text-lg font-bold ring-2 ring-white/40 hover:bg-white/20">
-                문의 안내 보기 →
-              </Link>
-            </div>
+    <section className="on-stage relative overflow-hidden bg-stage text-paper">
+      <div className="relative mx-auto grid max-w-[1120px] items-end gap-6 px-5 pt-20 md:grid-cols-12 md:pt-24">
+        <div className="pb-20 md:col-span-7 md:pb-24">
+          <p className="label !text-gold">공연 일정 문의</p>
+          <h2 className="font-serif mt-4 text-[1.9rem] leading-[1.3] sm:text-[2.75rem]">
+            “오토끼 또 언제 와요?”
+            <br />
+            그 질문을 우리 원에서도 들어 보세요
+          </h2>
+          <p className="mt-5 max-w-[520px] text-[17px] leading-[1.8] text-mist">
+            원하는 날짜와 인원만 알려 주시면 공연 주제와 회차, 견적까지 맞춰 안내해 드립니다.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <a href={`tel:${site.phone}`} className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3.5 text-[17px] font-semibold text-stage hover:bg-paper">
+              <Phone size={18} strokeWidth={1.75} aria-hidden /> {site.phone}
+            </a>
+            <Link href="/contact" className="text-[15px] text-mist underline underline-offset-4 hover:text-paper">
+              문의 전에 준비하면 좋은 정보
+            </Link>
           </div>
-          <Otoki
-            pose="wave"
-            className="absolute -bottom-6 right-4 hidden h-[115%] w-auto animate-float md:block"
-            sizes="260px"
-          />
         </div>
-      </Reveal>
+        <div className="hidden justify-end md:col-span-4 md:col-start-9 md:flex">
+          <Otoki pose={pose} className="h-[340px] w-auto" sizes="240px" />
+        </div>
+      </div>
     </section>
   );
 }

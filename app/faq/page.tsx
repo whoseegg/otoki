@@ -17,14 +17,17 @@ export const metadata: Metadata = {
 
 export default function FaqPage() {
   return (
-    <div className="bg-dream pt-28">
+    <>
       <JsonLd data={faqLd(all)} />
       <JsonLd data={breadcrumbLd([{ name: "자주 묻는 질문", path: "/faq" }])} />
-      <h1 className="font-display px-4 text-center text-4xl sm:text-6xl">무엇이든 물어보세요</h1>
-      <p className="mt-4 px-4 text-center text-lg text-ink-soft">원장님과 선생님이 가장 많이 물어보신 질문을 모았어요.</p>
-      <Faq items={all} title="자주 묻는 질문" />
+      <div className="mx-auto max-w-[1120px] px-5 pt-32 md:pt-40">
+        <p className="label">자주 묻는 질문</p>
+        <h1 className="font-serif mt-3 text-4xl sm:text-5xl">무엇이든 물어보세요</h1>
+        <p className="mt-4 text-[17px] text-muted">원장님과 선생님이 가장 많이 물어보신 질문을 모았습니다.</p>
+      </div>
+      <Faq items={all} title="공연 문의 전에 확인하세요" label="Q&A" />
       <QuickFacts />
-      <FinalCta />
-    </div>
+      <FinalCta pose="h" />
+    </>
   );
 }

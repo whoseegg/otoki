@@ -1,27 +1,21 @@
-import Reveal from "./Reveal";
+import { Plus } from "lucide-react";
 
-export default function Faq({ items, title = "자주 묻는 질문" }: { items: { q: string; a: string }[]; title?: string }) {
+export default function Faq({ items, title = "자주 묻는 질문", label = "FAQ" }: { items: { q: string; a: string }[]; title?: string; label?: string }) {
   return (
-    <section id="faq" className="mx-auto max-w-3xl px-4 py-24 sm:px-6">
-      <Reveal>
-        <h2 className="font-display text-center text-3xl sm:text-5xl">{title}</h2>
-      </Reveal>
-      <div className="mt-10 space-y-3">
+    <section id="faq" className="mx-auto grid max-w-[1120px] gap-10 px-5 py-24 md:grid-cols-12 md:py-32">
+      <div className="md:col-span-4">
+        <p className="label">{label}</p>
+        <h2 className="font-serif mt-3 text-[1.75rem] leading-snug sm:text-[2.5rem]">{title}</h2>
+      </div>
+      <div className="md:col-span-8">
         {items.map((f, i) => (
-          <Reveal key={f.q} delay={Math.min(i, 5) * 0.05}>
-            <details className="group rounded-2xl bg-white ring-2 ring-ink/10 open:ring-ink" open={i === 0}>
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-lg font-bold [&::-webkit-details-marker]:hidden">
-                <h3>
-                  <span className="mr-2 text-grape">Q.</span>
-                  {f.q}
-                </h3>
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-grape-soft transition group-open:rotate-45 group-open:bg-sun">
-                  +
-                </span>
-              </summary>
-              <p className="px-5 pb-5 leading-relaxed text-ink-soft">{f.a}</p>
-            </details>
-          </Reveal>
+          <details key={f.q} className="group border-t border-line last:border-b" open={i === 0}>
+            <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
+              <h3 className="text-[17px] font-semibold leading-relaxed">{f.q}</h3>
+              <Plus size={20} strokeWidth={1.75} className="mt-1 shrink-0 text-gold-ink transition-transform group-open:rotate-45" aria-hidden />
+            </summary>
+            <p className="pb-6 pr-10 leading-[1.8] text-muted">{f.a}</p>
+          </details>
         ))}
       </div>
     </section>

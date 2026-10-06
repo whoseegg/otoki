@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { CheckCircle2, Link2, Loader2, Pause, Phone, Play, Search, Sparkles } from "lucide-react";
 
 // AI 검색 화면을 연출한 모션그래픽 인포그래픽.
 // 영상 파일 대신 코드로 그려서 선명하고 가볍고, 텍스트를 검색엔진이 읽을 수 있습니다.
@@ -101,115 +102,94 @@ export default function AiSearchVideo({
   return (
     <div ref={box} className={`relative ${className}`}>
       <div
-        className={`relative w-full overflow-hidden rounded-[28px] ${tall ? "aspect-[3/4]" : "aspect-[4/5] sm:aspect-[16/11]"} bg-white shadow-[8px_8px_0_#2a1f5c] ring-[3px] ring-ink`}
+        className={`relative w-full overflow-hidden rounded-md border border-line bg-white ${tall ? "aspect-[3/4]" : "aspect-[4/5] sm:aspect-[16/11]"}`}
         role="img"
         aria-label={`AI 검색 연출 화면: "${query}"라고 물으면 AI가 오토끼의 시간여행을 소개합니다.`}
       >
-        {/* window bar */}
-        <div className="flex items-center gap-2 border-b-2 border-ink/10 bg-cream px-4 py-3">
-          <span className="h-3 w-3 rounded-full bg-coral" />
-          <span className="h-3 w-3 rounded-full bg-sun" />
-          <span className="h-3 w-3 rounded-full bg-leaf" />
-          <span className="ml-3 rounded-full bg-white px-3 py-1 text-xs font-bold text-ink-soft ring-1 ring-ink/10">
-            ✨ AI 검색
+        <div className="flex items-center gap-2 border-b border-line bg-paper px-4 py-3">
+          <span className="h-2.5 w-2.5 rounded-full bg-line" />
+          <span className="h-2.5 w-2.5 rounded-full bg-line" />
+          <span className="h-2.5 w-2.5 rounded-full bg-line" />
+          <span className="ml-3 inline-flex items-center gap-1.5 text-xs font-semibold text-muted">
+            <Sparkles size={13} strokeWidth={1.75} aria-hidden /> AI 검색
           </span>
         </div>
 
-        <div className="flex h-[calc(100%-50px)] flex-col gap-3 p-4 sm:p-6" style={{ opacity: fadeOut }}>
-          {/* user bubble or input */}
+        <div className="flex h-[calc(100%-42px)] flex-col gap-3 p-4 sm:p-6" style={{ opacity: fadeOut }}>
           {!sent ? (
-            <div className="mt-auto mb-auto">
-              <p className="font-display text-center text-xl text-ink-soft sm:text-2xl">무엇이든 물어보세요</p>
-              <div className="mx-auto mt-4 flex max-w-lg items-center gap-2 rounded-full bg-cream px-5 py-4 ring-2 ring-ink">
-                <span>🔎</span>
-                <span className="caret flex-1 text-base font-bold sm:text-lg">{typed}</span>
-                <span className={`grid h-9 w-9 place-items-center rounded-full text-white transition ${typed.length === query.length ? "bg-coral" : "bg-ink/20"}`}>
-                  ↑
-                </span>
+            <div className="my-auto">
+              <p className="font-serif text-center text-xl text-muted sm:text-2xl">무엇이든 물어보세요</p>
+              <div className="mx-auto mt-5 flex max-w-lg items-center gap-3 rounded-md border border-stage bg-paper px-4 py-3.5">
+                <Search size={18} strokeWidth={1.75} className="text-muted" aria-hidden />
+                <span className="caret flex-1 text-base font-semibold sm:text-lg">{typed}</span>
+                <span className={`grid h-8 w-8 place-items-center rounded-md transition-colors ${typed.length === query.length ? "bg-gold text-stage" : "bg-line text-white"}`}>↑</span>
               </div>
             </div>
           ) : (
-            <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-ink px-4 py-2.5 text-sm font-bold text-cream sm:text-base">
-              {query}
-            </div>
+            <div className="ml-auto max-w-[85%] rounded-md bg-stage px-4 py-2.5 text-sm font-semibold text-paper sm:text-base">{query}</div>
           )}
 
-          {/* scanning sources */}
           {scanning && (
-            <div className="rounded-2xl bg-cream p-4 ring-1 ring-ink/10">
-              <p className="text-sm font-bold text-ink-soft">
-                <span className="inline-block animate-spin">✳️</span> 믿을 수 있는 정보를 찾고 있어요
+            <div className="rounded-md bg-paper p-4">
+              <p className="flex items-center gap-2 text-sm font-semibold text-muted">
+                <Loader2 size={15} strokeWidth={1.75} className="animate-spin" aria-hidden /> 믿을 수 있는 정보를 찾고 있어요
               </p>
               <div className="mt-3 grid grid-cols-2 gap-2">
-                {sources.map((s, i) => {
+                {sources.map((src, i) => {
                   const on = scanP > (i + 1) / (sources.length + 1);
                   return (
-                    <div
-                      key={s}
-                      className={`flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-bold transition-all duration-300 sm:text-sm ${
-                        on ? "bg-leaf-soft text-ink" : "bg-white text-ink/40"
-                      }`}
-                    >
-                      <span>{on ? "✅" : "⏳"}</span> {s}
+                    <div key={src} className={`flex items-center gap-2 rounded-sm px-3 py-2 text-xs transition-colors sm:text-sm ${on ? "bg-paper-deep text-stage" : "text-muted/50"}`}>
+                      {on ? <CheckCircle2 size={15} strokeWidth={1.75} className="text-gold-ink" aria-hidden /> : <Loader2 size={15} strokeWidth={1.75} aria-hidden />}
+                      {src}
                     </div>
                   );
                 })}
               </div>
-              <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-ink/10">
-                <div className="h-full rounded-full bg-grape" style={{ width: `${scanP * 100}%` }} />
+              <div className="mt-3 h-px bg-line">
+                <div className="h-px bg-stage" style={{ width: `${scanP * 100}%` }} />
               </div>
             </div>
           )}
 
-          {/* answer */}
           {t >= 6 && (
             <div className="flex gap-3">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-grape text-white">✨</span>
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-stage text-gold">
+                <Sparkles size={15} strokeWidth={1.75} aria-hidden />
+              </span>
               <div className="flex-1">
                 <p className="text-sm leading-relaxed sm:text-[15px]">
                   {answer.slice(0, ansChars)}
                   {ansChars < answer.length && <span className="caret" />}
                 </p>
                 {cardP > 0 && (
-                  <div
-                    className="mt-3 flex items-center gap-3 rounded-2xl bg-sun-soft p-3 ring-2 ring-ink"
-                    style={{ opacity: cardP, transform: `translateY(${(1 - cardP) * 24}px)` }}
-                  >
-                    <div className="h-14 w-14 shrink-0 rounded-xl bg-white ring-2 ring-ink sm:h-16 sm:w-16">
-                      <Image src="/images/otoki-wave.webp" width={307} height={651} alt="" className="h-full w-full object-contain p-1" />
+                  <div className="mt-3 flex items-center gap-3 rounded-md border border-line bg-paper p-3" style={{ opacity: cardP, transform: `translateY(${(1 - cardP) * 16}px)` }}>
+                    <div className="h-14 w-14 shrink-0 rounded-sm bg-paper-deep sm:h-16 sm:w-16">
+                      <Image src="/images/poses/pose-f.webp" width={407} height={900} alt="" className="h-full w-full object-contain p-1" />
                     </div>
                     <div className="min-w-0">
-                      <p className="font-display text-lg leading-tight sm:text-xl">오토끼의 시간여행</p>
-                      <p className="truncate text-xs text-ink-soft">메타버스 무빙 씨어터 · 유치원·어린이집 방문 공연</p>
+                      <p className="font-serif text-lg leading-tight">오토끼의 시간여행</p>
+                      <p className="truncate text-xs text-muted">메타버스 무빙 씨어터 · 유치원·어린이집 방문 공연</p>
                       <div className="mt-1.5 flex flex-wrap gap-1">
                         {tags.map((tg) => (
-                          <span key={tg} className="rounded-full bg-white px-2 py-0.5 text-[10px] font-bold ring-1 ring-ink/20 sm:text-xs">
-                            {tg}
-                          </span>
+                          <span key={tg} className="rounded-sm border border-line bg-white px-1.5 py-0.5 text-[10px] text-muted sm:text-xs">{tg}</span>
                         ))}
                       </div>
                     </div>
                   </div>
                 )}
                 {t > 9.4 && (
-                  <div
-                    className="mt-3 flex flex-wrap items-center gap-2 text-xs sm:text-sm"
-                    style={{ opacity: ease(seg(t, 9.4, 0.5)) }}
-                  >
-                    <span className="font-bold text-ink-soft">출처</span>
-                    {["오토끼의 시간여행 공식 홈페이지", "자주 묻는 질문", "언론 보도"].map((src) => (
-                      <span key={src} className="rounded-full bg-cream px-2.5 py-1 font-bold ring-1 ring-ink/15">
-                        🔗 {src}
+                  <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted sm:text-sm" style={{ opacity: ease(seg(t, 9.4, 0.5)) }}>
+                    <span className="font-semibold">출처</span>
+                    {["공식 홈페이지", "자주 묻는 질문", "언론 보도"].map((src) => (
+                      <span key={src} className="inline-flex items-center gap-1">
+                        <Link2 size={12} strokeWidth={1.75} aria-hidden /> {src}
                       </span>
                     ))}
                   </div>
                 )}
                 {t > 10 && (
-                  <div
-                    className="mt-3 inline-flex items-center gap-2 rounded-full bg-coral px-4 py-2 text-sm font-bold text-white ring-2 ring-ink"
-                    style={{ opacity: ease(seg(t, 10, 0.4)), transform: `scale(${0.8 + 0.2 * ease(seg(t, 10, 0.4))})` }}
-                  >
-                    📅 공연 일정 문의하기
+                  <div className="mt-3 inline-flex items-center gap-2 rounded-md bg-gold px-4 py-2 text-sm font-semibold text-stage" style={{ opacity: ease(seg(t, 10, 0.4)) }}>
+                    <Phone size={14} strokeWidth={1.75} aria-hidden /> 공연 일정 문의하기
                   </div>
                 )}
               </div>
@@ -217,56 +197,32 @@ export default function AiSearchVideo({
           )}
         </div>
 
-        {/* stamp */}
         {stampP > 0 && (
           <div
             className="pointer-events-none absolute bottom-6 right-5 sm:bottom-10 sm:right-10"
-            style={{
-              opacity: stampP * fadeOut,
-              transform: `rotate(-12deg) scale(${2.2 - 1.2 * ease(stampP)})`,
-            }}
+            style={{ opacity: stampP * fadeOut, transform: `rotate(-8deg) scale(${1.8 - 0.8 * ease(stampP)})` }}
           >
-            <div className="rounded-2xl border-[3px] border-coral bg-white/95 px-4 py-2 text-center shadow-lg">
-              <p className="text-[10px] font-bold tracking-[0.2em] text-coral">AI PICK</p>
-              <p className="font-display text-xl text-coral sm:text-2xl">AI가 선택한 공연</p>
+            <div className="rounded-md border-2 border-gold-ink bg-white/95 px-4 py-2 text-center">
+              <p className="text-[10px] font-semibold tracking-[0.25em] text-gold-ink">AI PICK</p>
+              <p className="font-serif text-xl text-gold-ink sm:text-2xl">AI가 선택한 공연</p>
             </div>
           </div>
         )}
-        {stampP >= 1 &&
-          Array.from({ length: 14 }).map((_, i) => {
-            const p = seg(t, 11.1, 1.6);
-            const ang = (i / 14) * Math.PI * 2;
-            return (
-              <span
-                key={i}
-                className="pointer-events-none absolute bottom-[14%] right-[18%] text-lg"
-                style={{
-                  transform: `translate(${Math.cos(ang) * p * 140}px, ${Math.sin(ang) * p * 120 - p * 30}px) rotate(${p * 360}deg)`,
-                  opacity: (1 - p) * fadeOut,
-                }}
-                aria-hidden
-              >
-                {["⭐", "✨", "🎉", "💛"][i % 4]}
-              </span>
-            );
-          })}
       </div>
 
       {showControls && (
         <div className="mt-4 flex items-center gap-3">
           <button
             onClick={() => setPlaying((p) => !p)}
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-cream"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-stage text-paper"
             aria-label={playing ? "일시정지" : "재생"}
           >
-            {playing ? "❚❚" : "▶"}
+            {playing ? <Pause size={14} strokeWidth={2} aria-hidden /> : <Play size={14} strokeWidth={2} aria-hidden />}
           </button>
-          <div className="h-2 flex-1 overflow-hidden rounded-full bg-ink/10">
-            <div className="h-full rounded-full bg-coral" style={{ width: `${(t / LOOP) * 100}%` }} />
+          <div className="h-px flex-1 bg-line">
+            <div className="h-px bg-gold-ink" style={{ width: `${(t / LOOP) * 100}%` }} />
           </div>
-          <span className="w-12 text-right text-xs font-bold tabular-nums text-ink-soft">
-            0:{String(Math.floor(t)).padStart(2, "0")}
-          </span>
+          <span className="w-10 text-right text-xs tabular-nums text-muted">0:{String(Math.floor(t)).padStart(2, "0")}</span>
         </div>
       )}
     </div>

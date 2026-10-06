@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { CalendarDays, MapPin, Phone, Ruler, Theater, Users } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import Otoki from "@/components/Otoki";
+import { PlaybillList } from "@/components/Playbill";
 import { breadcrumbLd } from "@/lib/jsonld";
-import { programs } from "@/lib/programs";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -13,76 +13,74 @@ export const metadata: Metadata = {
 };
 
 const prepare = [
-  { icon: "🏫", t: "기관명과 지역", d: "예) 경기 하남시 햇살유치원" },
-  { icon: "📅", t: "희망 날짜 2~3개", d: "오전·오후 선호 시간도 함께" },
-  { icon: "👧", t: "예상 인원과 연령", d: "예) 만 4~5세 60명, 2회" },
-  { icon: "📐", t: "공연할 공간", d: "강당·유희실 등, 대략적인 크기" },
-  { icon: "🎟️", t: "관심 있는 공연 주제", d: "환경, 장애인식개선, 행사 등" },
+  { Icon: MapPin, t: "기관명과 지역", d: "예) 경기 하남시 햇살유치원" },
+  { Icon: CalendarDays, t: "희망 날짜 2~3개", d: "오전·오후 선호 시간도 함께" },
+  { Icon: Users, t: "예상 인원과 연령", d: "예) 만 4~5세 60명, 2회" },
+  { Icon: Ruler, t: "공연할 공간", d: "강당·유희실 등, 대략적인 크기" },
+  { Icon: Theater, t: "관심 있는 공연 주제", d: "환경, 장애인식개선, 행사 등" },
 ];
 
 export default function ContactPage() {
   return (
-    <div className="bg-dream pt-28 pb-24">
+    <>
       <JsonLd data={breadcrumbLd([{ name: "문의", path: "/contact" }])} />
-      <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <p className="font-bold text-coral">공연 일정·견적 문의</p>
-        <h1 className="font-display mt-3 text-4xl leading-snug sm:text-6xl">
-          시간여행 예약,
-          <br />
-          전화 한 통이면 끝!
-        </h1>
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
-          희망 날짜와 인원만 알려 주세요. 우리 원에 맞는 공연 주제와 회차, 견적까지 바로 안내해 드릴게요.
-        </p>
-
-        <div className="bg-night relative mt-10 overflow-hidden rounded-[32px] p-8 text-cream ring-[3px] ring-ink sm:p-12">
-          <p className="font-bold text-sun">공연 문의 전화</p>
-          <a href={`tel:${site.phone}`} className="font-display mt-2 block text-5xl tracking-wide sm:text-7xl">
-            {site.phone}
-          </a>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={`tel:${site.phone}`}
-              className="rounded-full bg-sun px-7 py-4 text-lg font-bold text-ink ring-2 ring-ink transition hover:-translate-y-0.5"
-            >
-              📞 지금 전화 걸기
+      <section className="on-stage bg-stage text-paper">
+        <div className="mx-auto grid max-w-[1120px] items-end gap-8 px-5 pt-32 md:grid-cols-12 md:pt-40">
+          <div className="pb-16 md:col-span-7 md:pb-20">
+            <p className="label !text-gold">공연 일정·견적 문의</p>
+            <h1 className="font-serif mt-4 text-4xl leading-[1.25] sm:text-5xl">
+              시간여행 예약,
+              <br />
+              전화 한 통이면 됩니다
+            </h1>
+            <a href={`tel:${site.phone}`} className="font-serif mt-8 block text-4xl tracking-wide text-gold sm:text-6xl">
+              {site.phone}
             </a>
-            {site.naverPlace && (
-              <a
-                href={site.naverPlace}
-                target="_blank"
-                rel="noopener"
-                className="rounded-full bg-[#03C75A] px-7 py-4 text-lg font-bold text-white ring-2 ring-white/40 transition hover:-translate-y-0.5"
-              >
-                N 네이버 플레이스에서 보기
+            <p className="mt-3 text-sm text-mist">네이버 플레이스 안심번호로 연결됩니다.</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href={`tel:${site.phone}`} className="inline-flex items-center gap-2 rounded-md bg-gold px-6 py-3.5 font-semibold text-stage hover:bg-paper">
+                <Phone size={18} strokeWidth={1.75} aria-hidden /> 지금 전화 걸기
               </a>
-            )}
+              {site.naverPlace && (
+                <a href={site.naverPlace} target="_blank" rel="noopener" className="inline-flex items-center rounded-md border border-paper/40 px-6 py-3.5 hover:border-paper">
+                  네이버 플레이스에서 보기
+                </a>
+              )}
+            </div>
           </div>
-          <p className="mt-6 text-sm text-cream/60">네이버 플레이스 안심번호로 연결됩니다.</p>
-          <Otoki pose="hello" className="absolute -bottom-4 right-6 hidden h-[95%] w-auto animate-float md:block" sizes="200px" />
+          <div className="hidden justify-end md:col-span-4 md:col-start-9 md:flex">
+            <Otoki pose="c" priority className="h-80 w-auto" sizes="240px" />
+          </div>
         </div>
+      </section>
 
-        <h2 className="font-display mt-16 text-3xl sm:text-4xl">통화 전에 준비하면 더 빨라요</h2>
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {prepare.map((p) => (
-            <li key={p.t} className="rounded-2xl bg-white p-5 ring-2 ring-ink/10">
-              <p className="text-2xl">{p.icon}</p>
-              <p className="mt-2 font-extrabold">{p.t}</p>
-              <p className="mt-1 text-sm text-ink-soft">{p.d}</p>
+      <section className="mx-auto grid max-w-[1120px] gap-10 px-5 py-20 md:grid-cols-12">
+        <div className="md:col-span-4">
+          <p className="label">통화 전 준비</p>
+          <h2 className="font-serif mt-3 text-[1.75rem] leading-snug sm:text-[2.25rem]">이 다섯 가지를 알려 주시면 더 빨라요</h2>
+        </div>
+        <ul className="md:col-span-8">
+          {prepare.map(({ Icon, t, d }) => (
+            <li key={t} className="flex gap-4 border-t border-line py-5 last:border-b">
+              <Icon size={22} strokeWidth={1.5} className="mt-0.5 shrink-0 text-gold-ink" aria-hidden />
+              <div>
+                <p className="font-semibold">{t}</p>
+                <p className="mt-1 text-[15px] text-muted">{d}</p>
+              </div>
             </li>
           ))}
         </ul>
+      </section>
 
-        <h2 className="mt-14 text-xl font-extrabold">공연 주제를 먼저 살펴보세요</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {programs.map((p) => (
-            <Link key={p.slug} href={`/program/${p.slug}`} className="rounded-full bg-white px-4 py-2 font-bold ring-2 ring-ink/10 hover:ring-ink">
-              {p.emoji} {p.title}
-              {p.status ? ` (${p.status})` : ""}
-            </Link>
-          ))}
+      <section className="mx-auto grid max-w-[1120px] gap-10 px-5 pb-24 md:grid-cols-12">
+        <div className="md:col-span-4">
+          <p className="label">공연 주제</p>
+          <h2 className="font-serif mt-3 text-[1.75rem]">먼저 살펴보세요</h2>
         </div>
-      </div>
-    </div>
+        <div className="md:col-span-8">
+          <PlaybillList />
+        </div>
+      </section>
+    </>
   );
 }

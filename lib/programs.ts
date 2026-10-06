@@ -2,12 +2,10 @@
 // 각 페이지는 검색 키워드 하나씩을 맡는 랜딩 페이지 역할을 합니다.
 export type Program = {
   slug: string;
-  emoji: string;
   name: string; // 메뉴/카드용 짧은 이름
   title: string; // 공연(콘텐츠) 제목
   status?: string; // 예: "출시 예정"
   short: string;
-  color: "sun" | "coral" | "leaf" | "sky" | "grape" | "berry";
   seoTitle: string;
   seoDescription: string;
   keywords: string[];
@@ -25,11 +23,9 @@ export type Program = {
 export const programs: Program[] = [
   {
     slug: "performance",
-    emoji: "🎪",
     name: "방문 공연",
     title: "오토끼의 시간여행",
     short: "우리 원으로 찾아가는 메타버스 체험 공연",
-    color: "grape",
     seoTitle: "유치원·어린이집 방문 공연 | 찾아가는 메타버스 체험 공연",
     seoDescription:
       "누적 1,800회 이상 공연한 유치원·어린이집 방문 공연 '오토끼의 시간여행'. 3D 홀로그램과 움직이는 오토마타 무대, 배우가 함께하는 찾아가는 체험 공연을 우리 원에서 만나 보세요.",
@@ -60,11 +56,9 @@ export const programs: Program[] = [
   },
   {
     slug: "metaverse",
-    emoji: "🪐",
     name: "메타버스 공연",
     title: "메타버스 무빙 씨어터",
     short: "홀로그램 + 오토마타 + 배우, 움직이는 극장",
-    color: "sky",
     seoTitle: "유아 메타버스 체험 공연 | 메타버스 무빙 씨어터",
     seoDescription:
       "3D 홀로그램과 2D 프로젝션 월, 움직이는 오토마타 무대를 하나로 합친 이동형 극장 '메타버스 무빙 씨어터'. 유치원·어린이집 아이들이 처음 만나는 메타버스 체험 공연입니다.",
@@ -95,11 +89,9 @@ export const programs: Program[] = [
   },
   {
     slug: "environment",
-    emoji: "🐋",
     name: "환경교육",
     title: "푸른고래이야기",
     short: "바다를 지키는 시간여행, 유아 환경교육 공연",
-    color: "leaf",
     seoTitle: "유아 환경교육 공연 | 푸른고래이야기 · 찾아가는 환경교육",
     seoDescription:
       "세계명작 '피노키오의 모험'을 바다와 환경오염 이야기로 재해석한 유아 환경교육 공연 '푸른고래이야기'. 분리수거로 공연 티켓을 만들고, 공연 후 환경 캠페인까지 이어지는 찾아가는 환경교육입니다.",
@@ -126,11 +118,9 @@ export const programs: Program[] = [
   },
   {
     slug: "disability",
-    emoji: "🤝",
     name: "장애인식교육",
     title: "모두의 놀이터",
     short: "다름과 닮음을 배우는 장애인식개선 공연",
-    color: "coral",
     seoTitle: "유아 장애인식개선교육 공연 | 모두의 놀이터 · 장애이해교육",
     seoDescription:
       "세계명작 '거인의 정원'을 바탕으로 한 유아 장애인식개선교육 공연 '모두의 놀이터'. 공연과 연계활동으로 장애 감수성을 키우는 유치원·어린이집 장애이해교육입니다.",
@@ -161,12 +151,10 @@ export const programs: Program[] = [
   },
   {
     slug: "ai",
-    emoji: "🤖",
     name: "디지털·AI 교육",
     title: "화면 속 너와 나",
     status: "출시 예정",
     short: "AI 시대, 올바른 디지털 시민이 되는 첫걸음",
-    color: "berry",
     seoTitle: "어린이 AI·디지털 시민성 교육 공연 | 화면 속 너와 나",
     seoDescription:
       "AI 시대에 맞춘 유아 디지털 시민성 교육 공연 '화면 속 너와 나'(가칭). 디지털 세상의 예절과 올바른 행동을 공연과 체험으로 즐겁게 배우는 유치원·어린이집 방문 프로그램입니다.",
@@ -193,12 +181,10 @@ export const programs: Program[] = [
   },
   {
     slug: "multicultural",
-    emoji: "🌏",
     name: "다문화교육",
     title: "어깨동무 친구들",
     status: "출시 예정",
     short: "다름의 아름다움을 배우는 다문화 공연",
-    color: "sun",
     seoTitle: "유아 다문화교육 공연 | 어깨동무 친구들",
     seoDescription:
       "서로의 문화를 존중하고 다름의 아름다움을 배우는 유아 다문화교육 공연 '어깨동무 친구들'(가칭). 유치원·어린이집으로 찾아가는 오토끼의 시간여행 다문화편입니다.",
@@ -225,11 +211,9 @@ export const programs: Program[] = [
   },
   {
     slug: "event",
-    emoji: "🎉",
     name: "방문 행사",
     title: "찾아가는 체험 행사",
     short: "기관 행사·지역 축제·캠프에 공연을 통째로",
-    color: "sun",
     seoTitle: "유치원·어린이집 방문 행사 | 찾아가는 체험 행사·초청 공연",
     seoDescription:
       "유치원·어린이집 행사, 육아종합지원센터·지자체 초청 공연, 도서관·복지관 행사, 캠프까지. 메타버스 무빙 씨어터와 함께하는 오토끼의 시간여행 방문 행사입니다.",

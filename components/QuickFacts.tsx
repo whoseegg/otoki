@@ -1,5 +1,4 @@
 import { site } from "@/lib/site";
-import Reveal from "./Reveal";
 
 // 검색엔진·AI가 한 번에 읽기 좋은 요약표 (GEO).
 export default function QuickFacts() {
@@ -13,23 +12,28 @@ export default function QuickFacts() {
     ["주제", "환경(푸른고래이야기), 장애인식개선(모두의 놀이터), 디지털 시민성, 다문화"],
     ["교육 연계", "개정 누리과정, UN 지속가능발전목표(SDGs), 사전·사후 활동, PBL"],
     ["공연 실적", "2021년부터 누적 1,800회 이상, 전국 40곳 공연 지사망"],
-    ["운영", `${site.org.name} 개발·주관`],
+    ["개발·주관", site.org.name],
   ];
   return (
-    <section className="mx-auto max-w-4xl px-4 pb-8 sm:px-6" aria-labelledby="quick-facts">
-      <Reveal>
-        <div className="rounded-3xl bg-white p-6 ring-2 ring-ink sm:p-8">
-          <h2 id="quick-facts" className="font-display text-2xl sm:text-3xl">한눈에 보는 오토끼의 시간여행</h2>
-          <dl className="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-[8rem_1fr]">
-            {rows.map(([k, v]) => (
-              <div key={k} className="contents">
-                <dt className="font-bold text-grape">{k}</dt>
-                <dd className="border-b border-dashed border-ink/10 pb-3 text-ink">{v}</dd>
-              </div>
-            ))}
-          </dl>
+    <section className="mx-auto max-w-[1120px] px-5 py-24" aria-labelledby="quick-facts">
+      <div className="grid gap-10 md:grid-cols-12">
+        <div className="md:col-span-4">
+          <p className="label">한눈에 보기</p>
+          <h2 id="quick-facts" className="font-serif mt-3 text-[1.75rem] leading-snug sm:text-[2.5rem]">
+            오토끼의 시간여행
+            <br />
+            공연 정보
+          </h2>
         </div>
-      </Reveal>
+        <dl className="md:col-span-8">
+          {rows.map(([k, v]) => (
+            <div key={k} className="grid grid-cols-[6.5rem_1fr] gap-4 border-t border-line py-4 last:border-b">
+              <dt className="text-[15px] font-semibold text-gold-ink">{k}</dt>
+              <dd className="text-[15px] leading-relaxed">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </section>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Jua, Noto_Sans_KR } from "next/font/google";
+import { Gowun_Batang } from "next/font/google";
 import FloatingCta from "@/components/FloatingCta";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -8,8 +8,7 @@ import { siteGraph } from "@/lib/jsonld";
 import { keywords, site } from "@/lib/site";
 import "./globals.css";
 
-const jua = Jua({ weight: "400", subsets: ["latin"], variable: "--font-jua", display: "swap", preload: false });
-const noto = Noto_Sans_KR({ subsets: ["latin"], weight: ["400", "500", "700", "800"], variable: "--font-noto", display: "swap", preload: false });
+const gowun = Gowun_Batang({ weight: "700", subsets: ["latin"], variable: "--font-gowun", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -41,13 +40,17 @@ export const metadata: Metadata = {
   formatDetection: { telephone: true },
 };
 
-export const viewport: Viewport = { themeColor: "#7b5cff" };
+export const viewport: Viewport = { themeColor: "#14324a" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className={`${jua.variable} ${noto.variable}`}>
+    <html lang="ko" className={gowun.variable}>
+      <head>
+        {/* Pretendard (SIL OFL) 자체 호스팅: 화면에 쓰인 글자 묶음만 내려받습니다 */}
+        <link rel="stylesheet" href="/fonts/pretendard/pretendardvariable-dynamic-subset.css" />
+      </head>
       <body>
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-cream">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-stage focus:px-4 focus:py-2 focus:text-paper">
           본문 바로가기
         </a>
         <JsonLd data={siteGraph()} />
